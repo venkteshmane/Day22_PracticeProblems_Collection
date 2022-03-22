@@ -1,10 +1,12 @@
-Apackage com.addressBookSystem;
+package com.addressBookSystem;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Comparator;
 
 class Contacts {
 	private String firstName;
@@ -91,7 +93,15 @@ class Contacts {
 
 	}
 }
-class AddressBook{
+class Sort {
+	static Comparator<Contacts> compareCity = new Comparator<Contacts>() {
+		public int compare(Contacts one, Contacts two) {
+			return one.getCity().compareTo(two.getCity());
+		}
+	};
+
+}
+class AddressBook {
 	public List<Contacts> list = new ArrayList<>();
 	Scanner scan = new Scanner(System.in);
 
@@ -107,10 +117,8 @@ class AddressBook{
 		boolean status = true;
 		do {
 
-			System.out.println("Enter the number according to to requirment");
-			System.out.println("Enter 1 to Add");
-			System.out.println("Enter 2 to Edit");
-			System.out.println("Enter 3 to Delete");
+			System.out.println("Choose Operation you want to do");
+			System.out.println("1. Add\t2.Edit\t3.Delete\t4.sortCity");
 			switch (scan.nextInt()) {
 			case 1:
 				add();
@@ -121,6 +129,8 @@ class AddressBook{
 			case 3:
 				delete();
 				break;
+			case 4:
+				sortCity();
 			default:
 				status = false;
 			}
@@ -128,7 +138,7 @@ class AddressBook{
 	}
 
 	public void add() {
-		Contacts contacts = new Contacts1();
+		Contacts contacts = new Contacts();
 		System.out.println("Enter the First name:");
 		String firstName = scan.next();
 		contacts.setFirstName(firstName);
@@ -204,6 +214,7 @@ class AddressBook{
 					System.out.println("Re-Correct your Email");
 					contacts.setEmail(scan.next());
 				}
+
 			}
 		}
 	}
@@ -214,7 +225,7 @@ class AddressBook{
 
 		Iterator<Contacts> iterator = list.listIterator();
 		while (iterator.hasNext()) {
-			Contacts1 contacts = iterator.next();
+			Contacts contacts = iterator.next();
 
 			if (firstName.equals(contacts.getFirstName())) {
 				list.remove(contacts);
@@ -229,12 +240,16 @@ class AddressBook{
 		}
 	}
 
+	public void sortCity() {
+		Collections.sort(list, Sort.compareCity);
+	}
+
 	@Override
 	public String toString() {
 		return "AddressBook{" + "list=" + list + '}';
 	}
 }
-public class UC7_EnsureNoDuplicateEntry {
+public class UC8_SearchPerson {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -250,6 +265,9 @@ public class UC7_EnsureNoDuplicateEntry {
 			addressBook.operation();
 			map.put(bookName, addressBook);
 			i++;
-		}		
+		}
+		System.out.println(map);
+
 	}
+
 }
