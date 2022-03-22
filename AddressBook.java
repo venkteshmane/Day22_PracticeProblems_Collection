@@ -92,16 +92,22 @@ class Contacts {
 }
 
 class Sort {
-	static Comparator<Contacts> compareCity = new Comparator<Contacts>() {
-		public int compare(Contacts one, Contacts two) {
-			return one.getCity().compareTo(two.getCity());
-		}
-	};
-	static Comparator<Contacts> compareState = new Comparator<Contacts>() {
-		public int compare(Contacts one, Contacts two) {
-			return one.getState().compareTo(two.getState());
-		}
-	};
+    static Comparator<Contacts> compareCity = new Comparator<>() {
+        public int compare(Contacts one, Contacts two) {
+            return one.getCity().compareTo(two.getCity());
+        }
+    };
+    static Comparator<Contacts> compareState = new Comparator<>() {
+        public int compare(Contacts one, Contacts two) {
+
+            return one.getState().compareTo(two.getState());
+        }
+    };
+    static Comparator<Contacts> compareFirstName = new Comparator<>() {
+        public int compare(Contacts one, Contacts two) {
+            return one.getFirstName().compareTo(two.getFirstName());
+        }
+    };
 }
 class AddressBook {
 	public List<Contacts> list = new ArrayList<>();
@@ -267,7 +273,7 @@ class AddressBook {
 		return "AddressBook{" + "list=" + list + '}';
 	}
 }
-public class UC10_CountPersonBYCityState {
+public class UC11_SortName {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
